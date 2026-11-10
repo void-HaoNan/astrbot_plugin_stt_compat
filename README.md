@@ -1,4 +1,4 @@
-# astrbot_plugin_stt_cn
+# astrbot_plugin_stt_compat · STT 提供商兼容
 
 把 **腾讯云、豆包（火山引擎）、讯飞** 的语音识别接入 AstrBot 的「语音转文字」提供商列表。
 
@@ -53,7 +53,7 @@
 
 ## 二、在 AstrBot 里配置
 
-1. 把本插件放进 `data/plugins/astrbot_plugin_stt_cn`。
+1. 把本插件放进 `data/plugins/astrbot_plugin_stt_compat`。
 2. 重启 AstrBot，日志出现 `Loading model tencent_asr_api3 ...` 等三行即注册成功。
 3. 面板 → 提供商 → 新增「语音转文字」提供商，按下面填：
 

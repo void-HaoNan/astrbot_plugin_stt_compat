@@ -1,7 +1,7 @@
-name: astrbot_plugin_stt_cn
-display_name: 国内语音识别提供商（腾讯云 / 豆包 / 讯飞）
-desc: 把腾讯云、豆包（火山引擎）、讯飞的录音文件识别接入 AstrBot 的 STT 提供商列表
+name: astrbot_plugin_stt_compat
+display_name: STT 提供商兼容（腾讯云 / 豆包 / 讯飞）
+desc: 把腾讯云、豆包、讯飞的语音识别接成 AstrBot 的 STT 提供商，并统一在插件设置里填密钥
 version: 0.1.0
 author: void-HaoNan
-repo: https://github.com/void-HaoNan/astrbot_plugin_stt_cn
+repo: https://github.com/void-HaoNan/astrbot_plugin_stt_compat
 astrbot_version: ">=4.0.0"

@@ -15,8 +15,8 @@ SECRET_FIELDS = ("tencent_secret_id", "tencent_secret_key", "doubao_api_key",
                  "xunfei_app_id", "xunfei_api_key", "xunfei_api_secret")
 
 
-@register("astrbot_plugin_stt_cn", "void-HaoNan",
-          "把腾讯云、豆包、讯飞的录音文件识别接进 AstrBot 的 STT 提供商", "0.1.1")
+@register("astrbot_plugin_stt_compat", "void-HaoNan",
+          "STT 提供商兼容（腾讯云 / 豆包 / 讯飞）", "0.1.1")
 class SttCnPlugin(Star):
     def __init__(self, context: Context) -> None:
         super().__init__(context)

@@ -1,5 +1,11 @@
 # 更新日志
 
+## 0.1.2
+
+- 插件改名 `astrbot_plugin_stt_compat`，显示名改成「STT 提供商兼容」，说明它做的事。
+- 密钥统一在插件设置里填，提供商页不再出现密钥框。
+
+
 ## 0.1.0
 
 - 新增腾讯云 ASR（`tencent_asr_api3`）：TC3-HMAC-SHA256 签名，调 SentenceRecognition。
