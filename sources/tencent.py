@@ -61,7 +61,6 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
     "腾讯云语音识别（只填 SecretId 和 SecretKey）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "tencent_asr_api3", "enable": True,
-                         "secret_id": "", "secret_key": "",
                          "engine_model_type": "16k_zh", "timeout": 30},
     provider_display_name="腾讯云 ASR",
 )

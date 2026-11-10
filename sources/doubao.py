@@ -23,7 +23,7 @@ RESOURCE = "volc.seedasr.auc"
     "豆包（火山引擎）大模型录音文件识别（X-Api-Key）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "doubao_asr_file", "enable": True,
-                         "api_key": "", "resource_id": RESOURCE, "timeout": 60},
+                         "resource_id": RESOURCE, "timeout": 60},
     provider_display_name="豆包 ASR（录音文件）",
 )
 class ProviderDoubaoFile(STTProvider):

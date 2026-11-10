@@ -20,7 +20,7 @@ from .base import cred
     "讯飞语音听写 V2.0（只填 AppID / APIKey / APISecret）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "xunfei_iat_ws", "enable": True,
-                         "app_id": "", "api_key": "", "api_secret": "", "timeout": 30},
+                         "timeout": 30},
     provider_display_name="讯飞 ASR（听写 V2.0）",
 )
 class ProviderXunfeiIat(STTProvider):
