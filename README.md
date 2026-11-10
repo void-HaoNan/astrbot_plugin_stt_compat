@@ -59,7 +59,7 @@
 
 **腾讯云**
 ```json
-{ "type": "tencent_asr_api3", "api_key": "SecretId:SecretKey",
+{ "type": "tencent_asr_api3", "secret_id": "SecretId", "secret_key": "SecretKey",
   "engine_model_type": "16k_zh" }
 ```
 
@@ -71,7 +71,7 @@
 
 **讯飞**
 ```json
-{ "type": "xunfei_iat_ws", "app_id": "APPID", "api_key": "APIKey:APISecret" }
+{ "type": "xunfei_iat_ws", "app_id": "APPID", "api_key": "APIKey", "api_secret": "APISecret" }
 ```
 
 4. 在「语音转文字」设置里把默认提供商选成新建的那一个。

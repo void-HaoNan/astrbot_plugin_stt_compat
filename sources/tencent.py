@@ -1,6 +1,6 @@
 """腾讯云 ASR：SentenceRecognition（API 3.0，TC3-HMAC-SHA256 签名）。
 
-凭证只有 SecretId / SecretKey（访问管理 → API 密钥管理），不需要 AppID。
+用户只需填 API 密钥管理里的 SecretId 和 SecretKey 两个值。
 """
 
 from __future__ import annotations
@@ -11,6 +11,7 @@ import hmac
 import json
 import time
 
+from astrbot.api import logger
 from astrbot.core.provider.entities import ProviderType
 from astrbot.core.provider.provider import STTProvider
 from astrbot.core.provider.register import register_provider_adapter
@@ -57,23 +58,23 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
 
 @register_provider_adapter(
     "tencent_asr_api3",
-    "腾讯云语音识别（SentenceRecognition / API 3.0）",
+    "腾讯云语音识别（只填 SecretId 和 SecretKey）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "tencent_asr_api3", "enable": True,
-                         "api_key": "",
+                         "secret_id": "", "secret_key": "",
                          "engine_model_type": "16k_zh", "timeout": 30},
-    provider_display_name="腾讯云 ASR（API 3.0）",
+    provider_display_name="腾讯云 ASR",
 )
 class ProviderTencentAPI3(STTProvider):
     def __init__(self, provider_config: dict, provider_settings: dict) -> None:
         super().__init__(provider_config, provider_settings)
         self.config = provider_config or {}
+        self.secret_id = str(self.config.get("secret_id") or "").strip()
+        self.secret_key = str(self.config.get("secret_key") or "").strip()
+        # 兼容早期把两个值写成 api_key="SecretId:SecretKey" 的配置
         raw = str(self.config.get("api_key") or "").strip()
-        if ":" in raw:
+        if raw and ":" in raw and not (self.secret_id and self.secret_key):
             self.secret_id, self.secret_key = [part.strip() for part in raw.split(":", 1)]
-        else:
-            self.secret_id = raw
-            self.secret_key = ""
         self.engine = str(self.config.get("engine_model_type") or "16k_zh")
         self.timeout = float(self.config.get("timeout") or 30)
 
@@ -81,7 +82,7 @@ class ProviderTencentAPI3(STTProvider):
         import aiohttp
 
         if not (self.secret_id and self.secret_key):
-            raise ValueError("腾讯云 ASR 缺少 SecretId / SecretKey")
+            raise ValueError("腾讯云 ASR 需要填 SecretId 和 SecretKey")
         data = read_audio(audio_url)
         payload = json.dumps({
             "EngSerViceType": self.engine,
