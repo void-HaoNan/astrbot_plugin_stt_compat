@@ -20,9 +20,6 @@ from .base import cred
     "讯飞语音听写 V2.0（只填 AppID / APIKey / APISecret）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "xunfei_iat_ws", "enable": True,
-                         "app_id": {"description": "讯飞 AppID", "hint": "在 console.xfyun.cn 我的应用 → 应用详情里复制 APPID（8 位左右）。", "type": "string", "secret": False, "default": ""},
-                         "api_key": {"description": "讯飞 APIKey", "hint": "同一个应用里的 APIKey，和 APISecret 配对做 HMAC-SHA256 签名；不要把 APPID 复制到这里。", "type": "string", "secret": True, "default": ""},
-                         "api_secret": {"description": "讯飞 APISecret", "hint": "同一个应用里的 APISecret，只显示一次；填错了会报 appId illegal 或 26610。", "type": "string", "secret": True, "default": ""},
                          "timeout": 30},
     provider_display_name="讯飞 ASR（听写 V2.0）",
 )

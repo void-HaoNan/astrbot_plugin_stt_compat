@@ -61,7 +61,6 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
     "腾讯云语音识别（只填 SecretId 和 SecretKey）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "tencent_asr_api3", "enable": True,
-                         "api_key": {"description": "SecretId:SecretKey", "hint": "打开 console.cloud.tencent.com/cam/capi 新建密钥，把 SecretId 和 SecretKey 用英文冒号连起来填，例如 AKIDxxx:密钥。这是腾讯云 API 3.0 的签名凭证，只需要这两个值，不需要 AppID。", "type": "string", "secret": True, "default": ""},
                          "engine_model_type": "16k_zh", "timeout": 30},
     provider_display_name="腾讯云 ASR",
 )

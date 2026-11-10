@@ -23,7 +23,6 @@ RESOURCE = "volc.seedasr.auc"
     "豆包（火山引擎）大模型录音文件识别（X-Api-Key）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "doubao_asr_file", "enable": True,
-                         "api_key": {"description": "豆包 API Key", "hint": "语音技术控制台 console.volcengine.com/speech/app 的应用详情里复制 36 位 API Key（UUID 格式）。注意不要用访问控制里的 AccessKeyId/SecretAccessKey，那两个语音服务不认。", "type": "string", "secret": True, "default": ""},
                          "resource_id": RESOURCE, "timeout": 60},
     provider_display_name="豆包 ASR（录音文件）",
 )
