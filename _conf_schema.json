@@ -1,0 +1,43 @@
+{
+  "tencent_secret_id": {
+    "description": "腾讯云 SecretId",
+    "type": "string",
+    "hint": "API 密钥管理里拿，和 SecretKey 配对",
+    "default": "",
+    "secret": true
+  },
+  "tencent_secret_key": {
+    "description": "腾讯云 SecretKey",
+    "type": "string",
+    "hint": "和 SecretId 成对，只显示一次",
+    "default": "",
+    "secret": true
+  },
+  "doubao_api_key": {
+    "description": "豆包 API Key",
+    "type": "string",
+    "hint": "语音技术控制台应用里那串 36 位 UUID",
+    "default": "",
+    "secret": true
+  },
+  "xunfei_app_id": {
+    "description": "讯飞 AppID",
+    "type": "string",
+    "hint": "语音听写大模型 V2.0 应用的 AppID",
+    "default": ""
+  },
+  "xunfei_api_key": {
+    "description": "讯飞 APIKey",
+    "type": "string",
+    "hint": "和 APISecret 一起做签名",
+    "default": "",
+    "secret": true
+  },
+  "xunfei_api_secret": {
+    "description": "讯飞 APISecret",
+    "type": "string",
+    "hint": "不要把 AppID 当成 APIKey 复制",
+    "default": "",
+    "secret": true
+  }
+}

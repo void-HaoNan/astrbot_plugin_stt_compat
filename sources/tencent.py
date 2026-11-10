@@ -16,7 +16,7 @@ from astrbot.core.provider.entities import ProviderType
 from astrbot.core.provider.provider import STTProvider
 from astrbot.core.provider.register import register_provider_adapter
 
-from .base import log, read_audio
+from .base import cred, log, read_audio
 
 HOST = "asr.tencentcloudapi.com"
 SERVICE = "asr"
@@ -69,8 +69,8 @@ class ProviderTencentAPI3(STTProvider):
     def __init__(self, provider_config: dict, provider_settings: dict) -> None:
         super().__init__(provider_config, provider_settings)
         self.config = provider_config or {}
-        self.secret_id = str(self.config.get("secret_id") or "").strip()
-        self.secret_key = str(self.config.get("secret_key") or "").strip()
+        self.secret_id = cred("tencent_secret_id") or str(self.config.get("secret_id") or "").strip()
+        self.secret_key = cred("tencent_secret_key") or str(self.config.get("secret_key") or "").strip()
         # 兼容早期把两个值写成 api_key="SecretId:SecretKey" 的配置
         raw = str(self.config.get("api_key") or "").strip()
         if raw and ":" in raw and not (self.secret_id and self.secret_key):

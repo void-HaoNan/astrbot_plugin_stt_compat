@@ -12,6 +12,7 @@ from astrbot.core.provider.provider import STTProvider
 from astrbot.core.provider.register import register_provider_adapter
 
 from ._xunfei_iat import read_wav_pcm, transcribe
+from .base import cred
 
 
 @register_provider_adapter(
@@ -26,9 +27,9 @@ class ProviderXunfeiIat(STTProvider):
     def __init__(self, provider_config: dict, provider_settings: dict) -> None:
         super().__init__(provider_config, provider_settings)
         self.config = provider_config or {}
-        self.app_id = str(self.config.get("app_id") or "").strip()
-        self.api_key = str(self.config.get("api_key") or "").strip()
-        self.api_secret = str(self.config.get("api_secret") or "").strip()
+        self.app_id = cred("xunfei_app_id") or str(self.config.get("app_id") or "").strip()
+        self.api_key = cred("xunfei_api_key") or str(self.config.get("api_key") or "").strip()
+        self.api_secret = cred("xunfei_api_secret") or str(self.config.get("api_secret") or "").strip()
         # 兼容早期 api_key="APIKey:APISecret" 的写法
         raw = str(self.config.get("api_key") or "").strip()
         if raw and ":" in raw and not self.api_secret:

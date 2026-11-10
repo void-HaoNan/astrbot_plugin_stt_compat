@@ -85,3 +85,20 @@ def dump(obj) -> str:
 
 def log(message: str) -> None:
     logger.info("[stt_cn] " + message)
+
+
+#: 插件配置里填的密钥（AstrBot 插件配置支持 secret 打码），提供商配置里可以不再存明文
+CREDENTIALS: dict = {}
+
+
+def set_credentials(values: dict) -> None:
+    CREDENTIALS.clear()
+    CREDENTIALS.update(values or {})
+
+
+def cred(*names: str) -> str:
+    for name in names:
+        value = str(CREDENTIALS.get(name) or '').strip()
+        if value:
+            return value
+    return ''
