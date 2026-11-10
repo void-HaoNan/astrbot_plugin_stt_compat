@@ -20,7 +20,7 @@ from ._xunfei_iat import read_wav_pcm, transcribe
     "讯飞语音听写大模型 V2.0（WebSocket）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "xunfei_iat_ws", "enable": True,
-                         "app_id": "", "api_key": "", "backup_api_key": "", "timeout": 30},
+                         "app_id": "", "api_key": "", "timeout": 30},
     provider_display_name="讯飞 ASR（听写 V2.0）",
 )
 class ProviderXunfeiIat(STTProvider):
@@ -33,7 +33,7 @@ class ProviderXunfeiIat(STTProvider):
             self.api_key, self.api_secret = [part.strip() for part in raw.split(":", 1)]
         else:
             self.api_key = raw
-            self.api_secret = str(self.config.get("backup_api_key") or "").strip()
+            self.api_secret = ""
         self.timeout = float(self.config.get("timeout") or 30)
 
     async def get_text(self, audio_url: str) -> str:

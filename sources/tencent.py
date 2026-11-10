@@ -60,7 +60,7 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
     "腾讯云语音识别（SentenceRecognition / API 3.0）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
     default_config_tmpl={"type": "tencent_asr_api3", "enable": True,
-                         "api_key": "", "backup_api_key": "",
+                         "api_key": "",
                          "engine_model_type": "16k_zh", "timeout": 30},
     provider_display_name="腾讯云 ASR（API 3.0）",
 )
@@ -73,7 +73,7 @@ class ProviderTencentAPI3(STTProvider):
             self.secret_id, self.secret_key = [part.strip() for part in raw.split(":", 1)]
         else:
             self.secret_id = raw
-            self.secret_key = str(self.config.get("backup_api_key") or "").strip()
+            self.secret_key = ""
         self.engine = str(self.config.get("engine_model_type") or "16k_zh")
         self.timeout = float(self.config.get("timeout") or 30)
 
