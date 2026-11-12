@@ -13,6 +13,12 @@
     "default": "",
     "secret": true
   },
+  "tencent_app_id": {
+    "description": "腾讯云 AppID",
+    "type": "string",
+    "hint": "130 开头的账号级 ID，和 SecretId/SecretKey 在同一个「API 密钥管理」页面；只有走实时语音识别（流式）才需要它，只做文件识别可以留空",
+    "default": ""
+  },
   "doubao_api_key": {
     "description": "豆包 API Key",
     "type": "string",

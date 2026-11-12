@@ -65,9 +65,14 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
     provider_display_name="腾讯云 ASR",
 )
 class ProviderTencentAPI3(STTProvider):
+    #: 实时语音识别（流式）地址：wss://asr.cloud.tencent.com/asr/v2/<appid>?...
+    #: AppID 在 URL 路径里，所以没配 AppID 时只能走文件接口。
+    STREAM_HOST = "asr.cloud.tencent.com"
+
     def __init__(self, provider_config: dict, provider_settings: dict) -> None:
         super().__init__(provider_config, provider_settings)
         self.config = provider_config or {}
+        self.app_id = cred("tencent_app_id") or str(self.config.get("app_id") or "").strip()
         self.secret_id = cred("tencent_secret_id") or str(self.config.get("secret_id") or "").strip()
         self.secret_key = cred("tencent_secret_key") or str(self.config.get("secret_key") or "").strip()
         # 兼容早期把两个值写成 api_key="SecretId:SecretKey" 的配置
@@ -104,3 +109,7 @@ class ProviderTencentAPI3(STTProvider):
         text = str(response_data.get("Result") or "").strip()
         log(f"腾讯云识别：{text[:60]}")
         return text
+
+    def stream_ready(self) -> bool:
+        """三个值齐了才能走实时语音识别（流式）；只做文件识别不看这个。"""
+        return bool(self.app_id and self.secret_id and self.secret_key)

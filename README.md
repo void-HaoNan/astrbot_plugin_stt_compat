@@ -131,3 +131,12 @@ AstrBot 4.x 会把插件配置注入插件构造函数（`config: AstrBotConfig`
 
 > 注意：不要用 `context.get_config()` 取插件配置——那个接口在 4.x 里返回的是 AstrBot 全局配置，
 > 拿到的永远是空值，表现就是运行时报「缺少 API Key」。
+
+### 腾讯云 AppID（0.2.1）
+
+| 字段 | 从哪拿 | 说明 |
+| --- | --- | --- |
+| `AppID` | 同一个 [API 密钥管理](https://console.cloud.tencent.com/cam/capi) 页面 | 130 开头的账号级 ID，**流式识别必需**（URL 路径里有它）；只做文件识别可留空 |
+
+补了 AppID，腾讯云就能同时支持「文件（SentenceRecognition）」和「实时语音识别（WebSocket 流式）」；
+不补则只有文件。

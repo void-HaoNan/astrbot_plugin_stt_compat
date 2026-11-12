@@ -15,12 +15,14 @@ from astrbot.api.star import Context, Star, register
 from . import sources
 from .sources.base import set_credentials
 
+#: 插件设置里要读的字段：三个密钥 + 三家各自的 AppID（AppID 不算密钥，但一起读省事）
 SECRET_FIELDS = ("tencent_secret_id", "tencent_secret_key", "doubao_api_key",
-                 "xunfei_app_id", "xunfei_api_key", "xunfei_api_secret")
+                 "xunfei_app_id", "xunfei_api_key", "xunfei_api_secret",
+                 "tencent_app_id")
 
 
 @register("astrbot_plugin_stt_compat", "void-HaoNan",
-          "STT 提供商兼容（腾讯云 / 豆包 / 讯飞 / 流式）", "0.2.0")
+          "STT 提供商兼容（腾讯云 / 豆包 / 讯飞 / 流式）", "0.2.1")
 class SttCnPlugin(Star):
     def __init__(self, context: Context, config=None) -> None:
         super().__init__(context)

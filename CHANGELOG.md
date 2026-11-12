@@ -1,5 +1,13 @@
 # 更新日志
 
+## 0.2.1
+
+- 腾讯云新增 **AppID** 字段（`_conf_schema.json` / `main.py` / `sources/tencent.py`）。
+  原因：实时语音识别 V2 的地址是 `wss://asr.cloud.tencent.com/asr/v2/<appid>?...`，
+  AppID 在 URL 路径里；原来只存 SecretId/SecretKey，所以腾讯只能走文件接口。
+  AppID 是 130 开头的账号级 ID，和密钥在同一个「API 密钥管理」页面。
+- `sources/tencent.py` 加 `stream_ready()`：三个值齐了才算能走流式。
+
 ## 0.2.0
 
 - **修：运行时报「豆包 ASR 缺少 API Key」**。根因是插件用 `context.get_config()` 取密钥，
