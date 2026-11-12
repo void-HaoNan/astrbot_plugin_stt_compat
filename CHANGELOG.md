@@ -1,5 +1,14 @@
 # 更新日志
 
+## 0.2.0
+
+- **修：运行时报「豆包 ASR 缺少 API Key」**。根因是插件用 `context.get_config()` 取密钥，
+  而 AstrBot 4.x 的这个接口返回的是 **全局配置**，不是插件配置；现在改成接收构造函数注入的
+  `config: AstrBotConfig`。
+- 新增文件兜底：注入的配置缺字段时，自动读
+  `data/config/astrbot_plugin_stt_compat_config.json`（带 mtime 缓存），密钥漏配也能跑。
+- 启动日志会打印「密钥已就绪：N 项」或「以下密钥为空：…」，不再静默失败。
+
 ## 0.1.3
 
 - 正式开源：仓库 `https://github.com/void-HaoNan/astrbot_plugin_stt_compat`，

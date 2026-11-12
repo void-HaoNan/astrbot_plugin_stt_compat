@@ -113,3 +113,21 @@ python -X utf8 tests/test_sign.py
 ## 七、许可
 
 MIT，见 [LICENSE](LICENSE)。
+
+---
+
+## 密钥从哪读（0.2.0）
+
+AstrBot 4.x 会把插件配置注入插件构造函数（`config: AstrBotConfig`），插件启动时读取并缓存；
+如果注入的配置里缺字段，还会按文件兜底读 `data/config/astrbot_plugin_stt_compat_config.json`
+（带 mtime 缓存，改完不用重启）。
+
+启动日志会明确告诉你结果：
+
+```
+[stt_cn] 密钥已就绪：6 项
+[stt_cn] 以下密钥为空：doubao_api_key（可在插件设置页填，或写进 data/config/...）
+```
+
+> 注意：不要用 `context.get_config()` 取插件配置——那个接口在 4.x 里返回的是 AstrBot 全局配置，
+> 拿到的永远是空值，表现就是运行时报「缺少 API Key」。

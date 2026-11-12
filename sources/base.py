@@ -1,4 +1,12 @@
-"""公共工具：读音频、签名、从 JSON 里按路径取字段。"""
+"""公共工具：读音频、签名、从 JSON 里按路径取字段。
+
+密钥来源（按优先级）：
+1. 插件构造时注入的配置（`set_credentials`）；
+2. `%USERPROFILE%\\data\\config\\astrbot_plugin_stt_compat_config.json`（按文件兜底）。
+
+2026-11-12：原来只认 1，而插件用了错误的 API（`context.get_config()` 拿的是全局配置），
+导致运行时永远「缺少 API Key」。加 2 之后，即使注入的 config 缺字段也能跑。
+"""
 
 from __future__ import annotations
 
@@ -87,7 +95,7 @@ def log(message: str) -> None:
     logger.info("[stt_cn] " + message)
 
 
-#: 插件配置里填的密钥（AstrBot 插件配置支持 secret 打码），提供商配置里可以不再存明文
+#: 插件配置里填的密钥（AstrBot 插件配置支持 secret 打码）
 CREDENTIALS: dict = {}
 
 
@@ -96,9 +104,44 @@ def set_credentials(values: dict) -> None:
     CREDENTIALS.update(values or {})
 
 
+# ---------------------------------------------------------------- 文件兜底
+_CONFIG_FILE: dict = {"path": "", "at": 0.0, "data": {}}
+
+
+def config_path() -> str:
+    """AstrBot 的插件配置文件路径（Windows / Linux 都是 data/config/<插件名>_config.json）。"""
+    return os.path.join(os.path.expanduser("~"), "data", "config",
+                        "astrbot_plugin_stt_compat_config.json")
+
+
+def _file_credentials() -> dict:
+    """读插件配置文件（带 mtime 缓存）：注入的 config 缺字段时靠它兜底。"""
+    path = config_path()
+    try:
+        mtime = os.path.getmtime(path)
+    except OSError:
+        return {}
+    if _CONFIG_FILE["at"] == mtime and _CONFIG_FILE["data"]:
+        return _CONFIG_FILE["data"]
+    try:
+        with open(path, encoding="utf-8-sig") as handle:
+            data = json.load(handle)
+    except Exception:  # noqa: BLE001 - 文件坏了就当没有，不影响已注入的配置
+        return {}
+    if not isinstance(data, dict):
+        return {}
+    _CONFIG_FILE.update({"path": path, "at": mtime, "data": data})
+    return data
+
+
 def cred(*names: str) -> str:
     for name in names:
-        value = str(CREDENTIALS.get(name) or '').strip()
+        value = str(CREDENTIALS.get(name) or "").strip()
         if value:
             return value
-    return ''
+    file_values = _file_credentials()
+    for name in names:
+        value = str(file_values.get(name) or "").strip()
+        if value:
+            return value
+    return ""
