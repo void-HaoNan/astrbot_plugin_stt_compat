@@ -1,5 +1,17 @@
 # 更新日志
 
+## 0.2.3
+
+腾讯 AppID 自动补齐（2026-11-14）：
+
+AstrBot 会用它内存里的配置覆盖 data/config/..._config.json，外部写进去的值重启就没
+（实测），所以改成**插件配置缺字段时回退读控制台设置**：
+
+- 定位顺序与控制台一致：PYMSS_DATA_DIR → 插件目录 hub_dir.txt → 用户目录 data；
+- 映射 ccount.tencent_app_id / secret_id / secret_key / doubao_api_key / xunfei_*；
+- 启动日志明确「以下字段取的控制台设置：…」「密钥已就绪：7 项」。
+
+实测：重启后日志 密钥已就绪：7 项，不再提示 tencent_app_id 为空。
 ## 0.2.2
 
 热重载不再炸（2026-11-14）：
