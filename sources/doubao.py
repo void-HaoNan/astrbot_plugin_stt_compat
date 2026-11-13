@@ -10,7 +10,7 @@ import uuid
 from astrbot.api import logger
 from astrbot.core.provider.entities import ProviderType
 from astrbot.core.provider.provider import STTProvider
-from astrbot.core.provider.register import register_provider_adapter
+from .registry import register_adapter
 
 from .base import cred, log, read_audio
 
@@ -18,7 +18,7 @@ BASE = "https://openspeech.bytedance.com/api/v3/auc/bigmodel"
 RESOURCE = "volc.seedasr.auc"
 
 
-@register_provider_adapter(
+@register_adapter(
     "doubao_asr_file",
     "豆包（火山引擎）大模型录音文件识别（X-Api-Key）",
     provider_type=ProviderType.SPEECH_TO_TEXT,

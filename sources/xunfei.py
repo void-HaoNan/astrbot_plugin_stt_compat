@@ -9,13 +9,13 @@ import asyncio
 
 from astrbot.core.provider.entities import ProviderType
 from astrbot.core.provider.provider import STTProvider
-from astrbot.core.provider.register import register_provider_adapter
+from .registry import register_adapter
 
 from ._xunfei_iat import read_wav_pcm, transcribe
 from .base import cred
 
 
-@register_provider_adapter(
+@register_adapter(
     "xunfei_iat_ws",
     "讯飞语音听写 V2.0（只填 AppID / APIKey / APISecret）",
     provider_type=ProviderType.SPEECH_TO_TEXT,

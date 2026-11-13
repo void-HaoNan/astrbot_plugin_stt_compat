@@ -14,7 +14,7 @@ import time
 from astrbot.api import logger
 from astrbot.core.provider.entities import ProviderType
 from astrbot.core.provider.provider import STTProvider
-from astrbot.core.provider.register import register_provider_adapter
+from .registry import register_adapter
 
 from .base import cred, log, read_audio
 
@@ -56,7 +56,7 @@ def tc3_headers(secret_id: str, secret_key: str, payload: bytes, now: int | None
             "X-TC-Region": REGION}
 
 
-@register_provider_adapter(
+@register_adapter(
     "tencent_asr_api3",
     "腾讯云语音识别（只填 SecretId 和 SecretKey）",
     provider_type=ProviderType.SPEECH_TO_TEXT,
