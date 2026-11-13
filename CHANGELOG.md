@@ -1,5 +1,16 @@
 # 更新日志
 
+## 0.2.2
+
+热重载不再炸（2026-11-14）：
+
+AstrBot 的 provider 注册表是全局的，面板点「重载」会重新执行插件模块，
+@register_provider_adapter 再跑一遍就抛「doubao_asr_file 已经注册」，
+整个插件加载失败。新增 sources/registry.py：名字已存在时不抛错，把注册表里的
+元数据原位换成新类（cls_type/desc/显示名），热重载后的新代码真正生效。
+
+	ests/test_reload.py：同进程 importlib.reload 适配器模块，验证不抛错且映射指向新类。
+
 ## 0.2.1
 
 - 腾讯云新增 **AppID** 字段（`_conf_schema.json` / `main.py` / `sources/tencent.py`）。

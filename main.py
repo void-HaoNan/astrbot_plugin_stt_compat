@@ -22,7 +22,7 @@ SECRET_FIELDS = ("tencent_secret_id", "tencent_secret_key", "doubao_api_key",
 
 
 @register("astrbot_plugin_stt_compat", "void-HaoNan",
-          "STT 提供商兼容（腾讯云 / 豆包 / 讯飞 / 流式）", "0.2.1")
+          "STT 提供商兼容（腾讯云 / 豆包 / 讯飞 / 流式）", "0.2.2")
 class SttCnPlugin(Star):
     def __init__(self, context: Context, config=None) -> None:
         super().__init__(context)

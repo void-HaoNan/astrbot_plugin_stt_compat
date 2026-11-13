@@ -1,7 +1,7 @@
 ﻿name: astrbot_plugin_stt_compat
 display_name: STT 提供商兼容（腾讯云 / 豆包 / 讯飞）
 desc: 把腾讯云、豆包、讯飞的语音识别接成 AstrBot 的 STT 提供商，并统一在插件设置里填密钥
-version: 0.2.1
+version: 0.2.2
 author: void-HaoNan
 repo: https://github.com/void-HaoNan/astrbot_plugin_stt_compat
 astrbot_version: ">=4.0.0"
